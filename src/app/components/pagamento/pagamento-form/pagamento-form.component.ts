@@ -52,7 +52,7 @@ export class PagamentoFormComponent implements OnInit {
             email: '',
             senha: '',
             tipo: 'CLIENTE'
-          } as Usuario, // AQUI O SEGREDO!
+          } as Usuario, 
           produtos: []
         },
         valor: this.form.value.valor

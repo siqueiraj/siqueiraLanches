@@ -22,11 +22,11 @@
         transition: color 0.3s;
 
         &:hover {
-          color: #ffc107; // Amarelo bonito no hover
+          color: #ffc107; 
         }
 
         &.active {
-          color: #ffc107; // Se estiver na rota ativa, também fica amarelo
+          color: #ffc107; 
         }
       }
     }

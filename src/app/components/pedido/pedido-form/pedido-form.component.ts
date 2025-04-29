@@ -67,7 +67,7 @@ export class PedidoFormComponent implements OnInit {
           nome: '',
           email: '',
           senha: '',
-          tipo: 'CLIENTE' // agora é CLIENTE e não string vazia
+          tipo: 'CLIENTE'
         } as Usuario,
         produtos: this.form.value.produtosIds.map((id: number) => ({
           id,

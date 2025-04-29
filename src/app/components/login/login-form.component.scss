@@ -11,7 +11,7 @@
   .titulo {
     font-size: 28px;
     margin-bottom: 20px;
-    color: #007bff; /* Azul do botão */
+    color: #007bff; 
     font-weight: bold;
   }
 
@@ -41,7 +41,7 @@
   button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff; /* Azul */
+    background-color: #007bff; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -51,7 +51,7 @@
     margin-top: 10px;
 
     &:hover {
-      background-color: #0056b3; /* Azul mais escuro */
+      background-color: #0056b3; 
     }
   }
 
