@@ -1,0 +1,21 @@
+<div class="login-container">
+  <h1 class="titulo">Siqueira Lanches</h1>
+
+  <h2>Login</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="entrar()">
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" formControlName="email" placeholder="Digite seu email">
+    </div>
+
+    <div class="form-group">
+      <label>Senha:</label>
+      <input type="password" formControlName="senha" placeholder="Digite sua senha">
+    </div>
+
+    <button type="submit">Entrar</button>
+
+    <p *ngIf="erroLogin" class="erro">Email ou senha inválidos.</p>
+  </form>
+</div>

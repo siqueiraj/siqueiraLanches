@@ -1,0 +1,37 @@
+<div class="pedido-container">
+  <h2 class="mb-4">Lista de Pedidos</h2>
+
+  <button class="btn btn-success mb-3" [routerLink]="['/pedidos/form']">Novo Pedido</button>
+
+  <div *ngIf="pedidos.length > 0; else semPedidos">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Comprador</th>
+          <th>Produtos</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pedido of pedidos">
+          <td>{{ pedido.comprador.nome || 'Nome não disponível' }}</td>
+          <td>
+            <ul class="mb-0">
+              <li *ngFor="let produto of pedido.produtos">
+                {{ produto.nome }}
+              </li>
+            </ul>
+          </td>
+          <td>
+            <button class="btn btn-primary btn-sm" [routerLink]="['/pedidos/form', pedido.id]">Editar</button>
+            <button class="btn btn-danger btn-sm ms-2" (click)="delete(pedido.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #semPedidos>
+    <p>Nenhum pedido encontrado.</p>
+  </ng-template>
+</div>

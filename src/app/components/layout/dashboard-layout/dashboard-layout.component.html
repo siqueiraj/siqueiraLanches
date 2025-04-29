@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Siqueira Lanches</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cardapio" routerLinkActive="active">Cardápio</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/carrinho" routerLinkActive="active">🛒 Carrinho</a>
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" routerLink="/produto" routerLinkActive="active">Produtos</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" routerLink="/pedido" routerLinkActive="active">Pedidos</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" routerLink="/pagamento" routerLinkActive="active">Pagamentos</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" routerLink="/avaliacao" routerLinkActive="active">Avaliações</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" routerLink="/usuario" routerLinkActive="active">Usuários</a>
+        </li>
+      </ul>
+
+      <div class="d-flex">
+        <button
+          *ngIf="isLoggedIn(); else loginButton"
+          class="btn btn-outline-light"
+          (click)="logout()"
+        >
+          Sair
+        </button>
+
+        <ng-template #loginButton>
+          <a class="btn btn-outline-light" routerLink="/login">Login</a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

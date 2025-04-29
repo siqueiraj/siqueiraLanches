@@ -1,0 +1,31 @@
+<div class="pagamento-container">
+  <h2 class="mb-4">Lista de Pagamentos</h2>
+
+  <button class="btn btn-success mb-3" [routerLink]="['/pagamentos/form']">Novo Pagamento</button>
+
+  <div *ngIf="pagamentos.length > 0; else semPagamentos">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID do Pedido</th>
+          <th>Valor</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pagamento of pagamentos">
+          <td>{{ pagamento.pedido.id }}</td>
+          <td>R$ {{ pagamento.valor | number:'1.2-2' }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" [routerLink]="['/pagamentos/form', pagamento.id]">Editar</button>
+            <button class="btn btn-danger btn-sm ms-2" (click)="delete(pagamento.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #semPagamentos>
+    <p>Nenhum pagamento encontrado.</p>
+  </ng-template>
+</div>

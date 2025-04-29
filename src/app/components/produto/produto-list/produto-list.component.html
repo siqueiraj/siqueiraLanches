@@ -1,0 +1,31 @@
+<div class="container">
+  <h2 class="mb-4">Lista de Produtos</h2>
+
+  <button class="btn-adicionar" (click)="novoProduto()">Novo Produto</button>
+
+  <div *ngIf="produtos.length > 0; else semProdutos">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos">
+          <td>{{ produto.nome }}</td>
+          <td>R$ {{ produto.preco || produto.preco | number:'1.2-2' }}</td>
+          <td>
+            <button class="btn-adicionar" (click)="editarProduto(produto.id)">Editar</button>
+            <button class="btn-adicionar" (click)="delete(produto.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #semProdutos>
+    <p>Nenhum produto encontrado.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,33 @@
+<div class="container">
+  <h2 class="mb-4">Lista de Usuários</h2>
+
+  <button class="btn-adicionar" (click)="novoUsuario()">Novo Usuário</button>
+
+  <div *ngIf="usuarios.length > 0; else semUsuarios">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Tipo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.nome }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.tipo }}</td>
+          <td>
+            <button class="btn-adicionar" (click)="editarUsuario(usuario.id)">Editar</button>
+            <button class="btn-adicionar" (click)="delete(usuario.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #semUsuarios>
+    <p>Nenhum usuário encontrado.</p>
+  </ng-template>
+</div>

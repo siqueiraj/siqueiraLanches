@@ -1,0 +1,96 @@
+.container {
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.btn-adicionar {
+  background-color: #28a745;
+  border: none;
+  padding: 10px 18px;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+}
+
+.btn-adicionar:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.table {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  thead {
+    background-color: #f8f9fa;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+}
+
+.table th {
+  font-weight: 600;
+  font-size: 16px;
+  color: #555;
+}
+
+button {
+  margin: 0 5px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button.btn-adicionar:nth-child(2) {
+  background-color: #007bff;
+}
+
+button.btn-adicionar:nth-child(2):hover {
+  background-color: #0056b3;
+}
+
+button.btn-adicionar:nth-child(3) {
+  background-color: #dc3545;
+}
+
+button.btn-adicionar:nth-child(3):hover {
+  background-color: #c82333;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #777;
+  text-align: center;
+}

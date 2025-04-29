@@ -1,0 +1,74 @@
+.cardapio-container {
+  padding: 40px;
+  background-color: #f8f9fa;
+  min-height: 80vh;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0d6efd; 
+    font-weight: bold;
+    font-size: 2rem;
+  }
+}
+
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.produto-card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+
+  h5.produto-nome {
+    font-size: 1.3rem;
+    color: #343a40;
+    margin-bottom: 10px;
+  }
+
+  .produto-descricao {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 15px;
+    min-height: 40px;
+  }
+
+  .produto-preco {
+    font-size: 1.2rem;
+    color: #198754;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .btn-adicionar {
+    background-color: #198754;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #157347;
+    }
+  }
+}
+
+.alert-info {
+  text-align: center;
+  font-weight: bold;
+  background-color: #e2e3e5;
+  padding: 20px;
+  border-radius: 10px;
+}

@@ -1,0 +1,32 @@
+<div class="avaliacao-container">
+  <h2 *ngIf="!id">Nova Avaliação</h2>
+  <h2 *ngIf="id">Editar Avaliação</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="mb-3">
+      <label for="nota">Nota (1 a 5)</label>
+      <input id="nota" type="number" class="form-control" formControlName="nota" min="1" max="5">
+    </div>
+
+    <div class="mb-3">
+      <label for="comentario">Comentário</label>
+      <textarea id="comentario" class="form-control" formControlName="comentario" rows="3"></textarea>
+    </div>
+
+    <button 
+      type="submit" 
+      class="btn btn-primary"
+      [disabled]="form.invalid"
+    >
+      {{ id ? 'Atualizar' : 'Salvar' }}
+    </button>
+
+    <button 
+      type="button" 
+      class="btn btn-secondary ms-2" 
+      (click)="router.navigate(['/avaliacoes'])"
+    >
+      Cancelar
+    </button>
+  </form>
+</div>

@@ -1,0 +1,49 @@
+.navbar {
+  background-color: #007bff;
+  padding: 15px 30px;
+
+  .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .navbar-nav {
+    .nav-item {
+      .nav-link {
+        color: white;
+        font-weight: bold;
+        margin-right: 10px;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #ffc107; // Amarelo bonito no hover
+        }
+
+        &.active {
+          color: #ffc107; // Se estiver na rota ativa, também fica amarelo
+        }
+      }
+    }
+  }
+
+  .d-flex {
+    .btn {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background-color: #007bff;
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+  }
+}
