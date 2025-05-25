@@ -3,15 +3,16 @@
   margin: 40px auto;
   padding: 30px;
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
   text-align: center;
   margin-bottom: 25px;
   font-weight: bold;
-  color: #0d6efd;
+  color: #EA1D2C;
+  font-size: 1.8rem;
 }
 
 .form-group {
@@ -21,17 +22,25 @@ h2 {
     display: block;
     font-weight: 600;
     margin-bottom: 6px;
-    color: #343a40;
+    color: #212529;
+    font-size: 0.95rem;
   }
 
   input,
   select {
     width: 100%;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 12px;
+    border-radius: 8px;
     border: 1px solid #ced4da;
     background-color: #f8f9fa;
     font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: #EA1D2C;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(234, 29, 44, 0.2);
+    }
   }
 }
 
@@ -40,36 +49,39 @@ h2 {
   padding: 20px;
   background-color: #f0f2f5;
   border: 1px solid #dee2e6;
-  border-radius: 10px;
+  border-radius: 12px;
 
   h5 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #495057;
     font-weight: bold;
+    font-size: 1.1rem;
   }
 }
 
 .button-group {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
   margin-top: 30px;
 
   button {
     flex: 1;
-    padding: 10px;
-    font-weight: bold;
-    border-radius: 6px;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 50px;
     border: none;
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
 
     &:first-child {
-      background-color: #0d6efd;
+      background-color: #EA1D2C;
       color: white;
 
       &:hover {
-        background-color: #0a58ca;
+        background-color: #c41623;
+        transform: scale(1.05);
       }
     }
 
@@ -79,6 +91,7 @@ h2 {
 
       &:hover {
         background-color: #565e64;
+        transform: scale(1.05);
       }
     }
   }
