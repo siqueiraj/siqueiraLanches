@@ -1,34 +1,33 @@
-<div class="pagamento-container">
-  <h2 *ngIf="!id" class="mb-4">Novo Pagamento</h2>
-  <h2 *ngIf="id" class="mb-4">Editar Pagamento</h2>
+<div class="pagamento-form-container shadow rounded p-4 bg-white" style="max-width: 500px; margin: auto;">
+  <h2 class="text-center mb-4">💳 Pagamento</h2>
+  
+  <div *ngIf="mensagemSucesso" class="alert alert-success text-center">
+    {{ mensagemSucesso }}
+  </div>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="mb-3">
-      <label for="pedidoId">ID do Pedido</label>
-      <input id="pedidoId" type="number" class="form-control" formControlName="pedidoId">
+      <label for="pedidoId" class="form-label fw-bold">ID do Pedido</label>
+      <input type="number" id="pedidoId" formControlName="pedidoId" class="form-control" readonly />
     </div>
 
     <div class="mb-3">
-      <label for="valor">Valor (R$)</label>
-      <input id="valor" type="number" step="0.01" class="form-control" formControlName="valor">
+      <label for="valor" class="form-label fw-bold">Valor</label>
+      <input type="number" id="valor" formControlName="valor" class="form-control" readonly />
     </div>
 
-    <div class="mt-4">
-      <button 
-        type="submit" 
-        class="btn btn-primary"
-        [disabled]="form.invalid"
-      >
-        {{ id ? 'Atualizar' : 'Salvar' }}
-      </button>
-
-      <button 
-        type="button" 
-        class="btn btn-secondary ms-2" 
-        (click)="router.navigate(['/pagamentos'])"
-      >
-        Cancelar
-      </button>
+    <div class="mb-3">
+      <label for="formaPagamento" class="form-label fw-bold">Forma de Pagamento</label>
+      <select id="formaPagamento" class="form-select" formControlName="formaPagamento">
+        <option value="">Selecione</option>
+        <option value="PIX">PIX</option>
+        <option value="CARTAO">Cartão</option>
+        <option value="DINHEIRO">Dinheiro</option>
+      </select>
     </div>
+
+    <button type="submit" class="btn-finalizar w-100" [disabled]="form.invalid">
+      ✅ Finalizar Pagamento
+    </button>
   </form>
 </div>

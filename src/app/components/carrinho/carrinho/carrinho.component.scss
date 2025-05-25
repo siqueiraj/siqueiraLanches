@@ -1,52 +1,130 @@
-.d-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-h2 {
-  font-weight: bold;
-}
-
-.card {
+.carrinho-card {
   margin-bottom: 15px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid #dee2e6;
   background-color: #ffffff;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-.card-body {
-  padding: 15px;
+.carrinho-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.carrinho-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
 }
 
-.button-group {
-  display: flex;
-  gap: 8px;
+.produto-info h5 {
+  font-weight: bold;
+  color: #212529;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
 
-  button {
-    font-weight: bold;
-  }
+.produto-info p {
+  font-size: 0.95rem;
+  color: #6c757d;
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantidade-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.quantidade-control .quant-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background-color: #EA1D2C; 
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.quantidade-control .quant-btn:hover {
+  background-color: #c41623;
+  transform: scale(1.1);
+}
+
+.quantidade-control .quantidade {
+  min-width: 24px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #343a40;
+}
+
+.btn-remover {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  background-color: #dc3545;
+  color: white;
+  border: 1px solid #dc3545;
+  transition: all 0.3s ease;
+}
+
+.btn-remover:hover {
+  background-color: white;
+  color: #dc3545;
+  transform: scale(1.05);
 }
 
 .total {
   text-align: right;
-  margin-top: 20px;
+  margin: 30px 20px 0 20px;
+  padding: 0 10px;
+}
 
-  h4 {
-    font-weight: bold;
-    color: #198754;
-    padding-right: 15px ;
-  }
+.total h4 {
+  font-weight: bold;
+  color: #EA1D2C; 
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.total .finalizar-btn {
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #EA1D2C; 
+  color: white;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.total .finalizar-btn:hover {
+  background-color: #c41623;
+  transform: scale(1.05);
 }
 
 .alert-info {
   text-align: center;
   font-weight: bold;
   background-color: #e2e3e5;
-  padding: 10px;
+  padding: 15px;
   border-radius: 8px;
 }

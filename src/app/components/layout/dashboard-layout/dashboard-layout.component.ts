@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { CarrinhoService } from '../../../services/carrinho.service';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -11,18 +12,27 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard-layout.component.html',
   styleUrls: ['./dashboard-layout.component.scss']
 })
-export class DashboardLayoutComponent {
+export class DashboardLayoutComponent implements OnInit {
+  totalCarrinho = 0;
 
   constructor(
-    private authService: AuthService,
-    private router: Router
+    public authService: AuthService,
+    private router: Router,
+    private carrinhoService: CarrinhoService
   ) {}
 
-  isLoggedIn() {
+  ngOnInit(): void {
+    this.totalCarrinho = this.carrinhoService.getQuantidadeTotal();
+    this.carrinhoService.carrinhoObservable.subscribe(() => {
+      this.totalCarrinho = this.carrinhoService.getQuantidadeTotal();
+    });
+  }
+
+  isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
   }

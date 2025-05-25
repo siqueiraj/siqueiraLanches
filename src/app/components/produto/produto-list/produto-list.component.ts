@@ -30,11 +30,11 @@ export class ProdutoListComponent implements OnInit {
   }
 
   novoProduto(): void {
-    this.router.navigate(['/produtos/form']);
+    this.router.navigate(['produto/novo']);
   }
 
   editarProduto(id: number): void {
-    this.router.navigate(['/produtos/form', id]);
+    this.router.navigate(['/produto/editar', id]);
   }
 
   delete(id: number): void {

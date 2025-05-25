@@ -1,17 +1,17 @@
-.form-container {
-  max-width: 500px;
+.usuario-form-container {
+  max-width: 600px;
   margin: 40px auto;
   padding: 30px;
-  background-color: #f0f2f5;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
   text-align: center;
   margin-bottom: 25px;
   font-weight: bold;
-  color: #343a40;
+  color: #0d6efd;
 }
 
 .form-group {
@@ -20,60 +20,66 @@ h2 {
   label {
     display: block;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    color: #343a40;
   }
 
-  input {
+  input,
+  select {
     width: 100%;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #ced4da;
-    background-color: #fff;
+    background-color: #f8f9fa;
+    font-size: 0.95rem;
+  }
+}
+
+.endereco-card {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f0f2f5;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+
+  h5 {
+    margin-bottom: 20px;
+    color: #495057;
+    font-weight: bold;
   }
 }
 
 .button-group {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  gap: 10px;
+  margin-top: 30px;
 
   button {
     flex: 1;
-    margin: 0 5px;
     padding: 10px;
     font-weight: bold;
     border-radius: 6px;
-    background-color: #0d6efd;
-    color: #fff;
     border: none;
+    font-size: 1rem;
     transition: background-color 0.3s ease;
 
-    &:hover {
-      background-color: #0a58ca;
+    &:first-child {
+      background-color: #0d6efd;
+      color: white;
+
+      &:hover {
+        background-color: #0a58ca;
+      }
     }
 
-    &:nth-child(2) {
+    &:last-child {
       background-color: #6c757d;
+      color: white;
 
       &:hover {
         background-color: #565e64;
       }
     }
   }
-}
-
-.alert {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: bold;
-}
-.alert-success {
-  background-color: #d1e7dd;
-  color: #0f5132;
-}
-.alert-error {
-  background-color: #f8d7da;
-  color: #842029;
 }

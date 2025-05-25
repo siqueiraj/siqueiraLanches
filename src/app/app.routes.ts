@@ -27,27 +27,27 @@ export const routes: Routes = [
       
       { path: 'cardapio', component: CardapioComponent },
 
-      { path: 'produto', component: ProdutoListComponent, canActivate: [AuthGuard] },
-      { path: 'produto/novo', component: ProdutoFormComponent, canActivate: [AuthGuard] },
-      { path: 'produto/editar/:id', component: ProdutoFormComponent, canActivate: [AuthGuard] },
+      { path: 'produto', component: ProdutoListComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+      { path: 'produto/novo', component: ProdutoFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+      { path: 'produto/editar/:id', component: ProdutoFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
 
-      { path: 'pedido', component: PedidoListComponent, canActivate: [AuthGuard] },
-      { path: 'pedido/novo', component: PedidoFormComponent, canActivate: [AuthGuard] },
-      { path: 'pedido/editar/:id', component: PedidoFormComponent, canActivate: [AuthGuard] },
+      { path: 'pedido', component: PedidoListComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+      { path: 'pedido/novo', component: PedidoFormComponent, canActivate: [AuthGuard], data: { roles: ['USUARIO', 'ADMIN'] } },
+      { path: 'pedido/editar/:id', component: PedidoFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
 
-      { path: 'pagamento', component: PagamentoListComponent, canActivate: [AuthGuard] },
-      { path: 'pagamento/novo', component: PagamentoFormComponent, canActivate: [AuthGuard] },
-      { path: 'pagamento/editar/:id', component: PagamentoFormComponent, canActivate: [AuthGuard] },
+      { path: 'pagamento', component: PagamentoListComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+      { path: 'pagamento/:id', component: PagamentoFormComponent, canActivate: [AuthGuard], data: { roles: ['USUARIO', 'ADMIN'] } },
+      { path: 'pagamento/editar/:id', component: PagamentoFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
 
-      { path: 'avaliacao', component: AvaliacaoListComponent, canActivate: [AuthGuard] },
+      { path: 'avaliacao', component: AvaliacaoListComponent },
       { path: 'avaliacao/novo/:idProduto', component: AvaliacaoFormComponent, canActivate: [AuthGuard] },
       { path: 'avaliacao/editar/:id', component: AvaliacaoFormComponent, canActivate: [AuthGuard] },
 
       {path : 'carrinho', component: CarrinhoComponent},
 
-      { path: 'usuario', component: UsuarioListComponent, canActivate: [AuthGuard] },
-      { path: 'usuario/novo', component: UsuarioFormComponent, canActivate: [AuthGuard] },
-      { path: 'usuario/editar/:id', component: UsuarioFormComponent, canActivate: [AuthGuard] },
+      { path: 'usuario', component: UsuarioListComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+      { path: 'usuario/novo', component: UsuarioFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+      { path: 'usuario/editar/:id', component: UsuarioFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
     ]
   }
 ];

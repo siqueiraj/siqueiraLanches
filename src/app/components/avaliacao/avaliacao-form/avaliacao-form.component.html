@@ -13,19 +13,11 @@
       <textarea id="comentario" class="form-control" formControlName="comentario" rows="3"></textarea>
     </div>
 
-    <button 
-      type="submit" 
-      class="btn btn-primary"
-      [disabled]="form.invalid"
-    >
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
       {{ id ? 'Atualizar' : 'Salvar' }}
     </button>
 
-    <button 
-      type="button" 
-      class="btn btn-secondary ms-2" 
-      (click)="router.navigate(['/avaliacoes'])"
-    >
+    <button type="button" class="btn btn-secondary ms-2" (click)="router.navigate(['/avaliacoes'])">
       Cancelar
     </button>
   </form>

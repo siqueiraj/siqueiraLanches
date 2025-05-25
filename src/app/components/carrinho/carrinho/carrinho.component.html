@@ -1,22 +1,27 @@
 <div *ngIf="itens.length > 0; else carrinhoVazio">
-  <div *ngFor="let item of itens" class="card mb-3">
-    <div class="card-body d-flex justify-content-between align-items-center">
-      <div>
+  <div *ngFor="let item of itens" class="card carrinho-card">
+    <div class="card-body carrinho-item">
+      <div class="produto-info">
         <h5 class="card-title">{{ item.produto.nome }}</h5>
         <p class="mb-0"><strong>Preço Unitário:</strong> R$ {{ item.produto.preco | number: '1.2-2' }}</p>
-        <p class="mb-0"><strong>Quantidade:</strong> {{ item.quantidade }}</p>
+        <p class="mb-0"><strong>Subtotal:</strong> R$ {{ (item.produto.preco * item.quantidade) | number: '1.2-2' }}</p>
       </div>
 
-      <div class="button-group">
-        <button class="btn btn-secondary btn-sm" (click)="diminuirQuantidade(item.produto)">-</button>
-        <button class="btn btn-secondary btn-sm" (click)="aumentarQuantidade(item.produto)">+</button>
-        <button class="btn btn-danger btn-sm" (click)="removerItem(item.produto)">Remover</button>
+      <div class="acoes">
+        <div class="quantidade-control">
+          <button class="quant-btn" (click)="diminuirQuantidade(item.produto)">−</button>
+          <span class="quantidade">{{ item.quantidade }}</span>
+          <button class="quant-btn" (click)="aumentarQuantidade(item.produto)">+</button>
+        </div>
+
+        <button class="btn btn-outline-danger btn-sm btn-remover" (click)="removerItem(item.produto)">Remover</button>
       </div>
     </div>
   </div>
 
-  <div class="total">
+  <div class="total mt-4 d-flex justify-content-between align-items-center">
     <h4>Total: R$ {{ total | number: '1.2-2' }}</h4>
+    <button class="btn btn-success finalizar-btn" (click)="finalizarPedido()">Finalizar Pedido</button>
   </div>
 </div>
 

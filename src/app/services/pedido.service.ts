@@ -3,6 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pedido } from '../models/pedido.model';
 
+interface PedidoDTO {
+  compradorId: number;
+  itens: {
+    produtoId: number;
+    quantidade: number;
+  }[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,22 +20,32 @@ export class PedidoService {
   constructor(private http: HttpClient) {}
 
   listAll(): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(`${this.apiUrl}/listAll`);
+    return this.http.get<Pedido[]>(`${this.apiUrl}/listAll`, {
+      withCredentials: true
+    });
   }
 
   findById(id: number): Observable<Pedido> {
-    return this.http.get<Pedido>(`${this.apiUrl}/findById/${id}`);
+    return this.http.get<Pedido>(`${this.apiUrl}/findById/${id}`, {
+      withCredentials: true
+    });
   }
 
-  save(pedido: Pedido): Observable<Pedido> {
-    return this.http.post<Pedido>(this.apiUrl, pedido);
-  }
-
-  update(id: number, pedido: Pedido): Observable<Pedido> {
-    return this.http.put<Pedido>(`${this.apiUrl}/update/${id}`, pedido);
-  }
+  save(pedido: PedidoDTO): Observable<Pedido> {
+    return this.http.post<Pedido>(`${this.apiUrl}/save`, pedido, {
+      withCredentials: true
+    });
+  }  
+  
+  update(id: number, pedido: PedidoDTO): Observable<Pedido> {
+    return this.http.put<Pedido>(`${this.apiUrl}/update/${id}`, pedido, {
+      withCredentials: true
+    });
+  }  
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, {
+      withCredentials: true
+    });
   }
 }

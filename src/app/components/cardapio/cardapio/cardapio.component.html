@@ -1,4 +1,4 @@
-<div class="cardapio-container">
+<div class="cardapio-container"> 
   <h2>Cardápio</h2>
 
   <div *ngIf="produtos.length > 0; else semProdutos" class="produtos-grid">
@@ -9,6 +9,10 @@
 
       <button class="btn-adicionar" (click)="adicionarAoCarrinho(produto)">
         Adicionar ao Carrinho
+      </button>
+
+      <button class="btn-avaliar" (click)="avaliarProduto(produto)">
+        Avaliar Produto
       </button>
     </div>
   </div>

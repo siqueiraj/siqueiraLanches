@@ -12,22 +12,32 @@ export class PagamentoService {
   constructor(private http: HttpClient) {}
 
   listAll(): Observable<Pagamento[]> {
-    return this.http.get<Pagamento[]>(`${this.apiUrl}/listAll`);
+    return this.http.get<Pagamento[]>(`${this.apiUrl}/listAll`, {
+      withCredentials: true
+    });
   }
 
   findById(id: number): Observable<Pagamento> {
-    return this.http.get<Pagamento>(`${this.apiUrl}/findById/${id}`);
+    return this.http.get<Pagamento>(`${this.apiUrl}/findById/${id}`, {
+      withCredentials: true
+    });
   }
 
-  save(pagamento: Partial<Pagamento>): Observable<Pagamento> {
-    return this.http.post<Pagamento>(`${this.apiUrl}/save`, pagamento);
+  save(pagamento: { pedidoId: number, valor: number }): Observable<Pagamento> {
+    return this.http.post<Pagamento>(`${this.apiUrl}/save`, pagamento, {
+      withCredentials: true
+    });
   }
 
-  update(id: number, pagamento: Partial<Pagamento>): Observable<Pagamento> {
-    return this.http.put<Pagamento>(`${this.apiUrl}/update/${id}`, pagamento);
+  update(id: number, pagamento: { pedidoId: number, valor: number }): Observable<Pagamento> {
+    return this.http.put<Pagamento>(`${this.apiUrl}/update/${id}`, pagamento, {
+      withCredentials: true
+    });
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, {
+      withCredentials: true
+    });
   }
 }

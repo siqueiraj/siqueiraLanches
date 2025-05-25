@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, of } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 
 @Injectable({
@@ -18,17 +18,27 @@ export class AuthService {
   }
 
   login(email: string, senha: string): Observable<Usuario> {
-    return this.http.post<Usuario>(this.apiUrl, { email, senha }).pipe(
-      tap((usuario: Usuario) => {
+    return this.http.post(this.apiUrl, { email, senha }, { responseType: 'text' }).pipe(
+      switchMap((token: string) => {
+        const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+        const usuario: Usuario = {
+          id: tokenPayload.id,
+          nome: '',
+          email: tokenPayload.sub,
+          senha: '',
+          tipo: tokenPayload.role === 'CLIENTE' ? 'USUARIO' : tokenPayload.role,
+          token: token
+        };
         this.usuarioLogado = usuario;
         localStorage.setItem('usuario', JSON.stringify(usuario));
+        return of(usuario);
       })
     );
   }
 
   logout(): void {
     this.usuarioLogado = null;
-    localStorage.removeItem('usuario'); 
+    localStorage.removeItem('usuario');
   }
 
   getUsuario(): Usuario | null {
@@ -37,5 +47,9 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.usuarioLogado != null;
+  }
+
+  hasRole(role: 'ADMIN' | 'USUARIO'): boolean {
+    return this.usuarioLogado?.tipo === role;
   }
 }

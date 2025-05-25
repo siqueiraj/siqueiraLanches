@@ -1,30 +1,37 @@
 <div class="avaliacao-container">
-  <h2 class="mb-4">Lista de Avaliações</h2>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Avaliações</h2>
+    <button class="btn-nova-avaliacao" [routerLink]="['/avaliacao/novo']">Nova Avaliação</button>
+  </div>
 
   <div *ngIf="avaliacoes.length > 0; else semAvaliacoes">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Produto</th>
-          <th>Nota</th>
-          <th>Comentário</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let avaliacao of avaliacoes">
-          <td>{{ avaliacao.produto.nome || 'Nome não disponível' }}</td>
-          <td>
-            <span *ngFor="let estrela of [].constructor(avaliacao.nota)">
-              ⭐
-            </span>
-          </td>
-          <td>{{ avaliacao.comentario }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-striped align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Nota</th>
+              <th>Comentário</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let avaliacao of avaliacoes">
+              <td>{{ avaliacao.produto?.nome || 'Produto não disponível' }}</td>
+              <td>
+                <span *ngFor="let estrela of [].constructor(avaliacao.nota)">⭐</span>
+              </td>
+              <td>{{ avaliacao.comentario }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <ng-template #semAvaliacoes>
-    <p>Nenhuma avaliação encontrada.</p>
+    <div class="alert alert-secondary text-center mt-4">
+      Nenhuma avaliação encontrada.
+    </div>
   </ng-template>
 </div>

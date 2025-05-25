@@ -5,6 +5,7 @@ export interface Usuario {
     nome: string;
     email: string;
     senha: string;
-    tipo: 'ADMIN' | 'CLIENTE';
+    tipo: 'ADMIN' | 'USUARIO';
+    token?: string;
     endereco?: Endereco;
   }

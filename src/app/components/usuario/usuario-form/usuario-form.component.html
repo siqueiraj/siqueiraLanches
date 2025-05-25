@@ -1,81 +1,68 @@
-<div class="usuario-container">
+<div class="usuario-form-container">
   <h2 *ngIf="!id" class="mb-4">Novo Usuário</h2>
   <h2 *ngIf="id" class="mb-4">Editar Usuário</h2>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="mb-3">
+    <div class="form-group">
       <label for="nome">Nome</label>
       <input id="nome" type="text" class="form-control" formControlName="nome">
     </div>
 
-    <div class="mb-3">
+    <div class="form-group">
       <label for="email">Email</label>
       <input id="email" type="email" class="form-control" formControlName="email">
     </div>
 
-    <div class="mb-3">
+    <div class="form-group">
       <label for="senha">Senha</label>
       <input id="senha" type="password" class="form-control" formControlName="senha">
     </div>
 
-    <div class="mb-3">
+    <div class="form-group">
       <label for="tipo">Tipo</label>
       <select id="tipo" class="form-select" formControlName="tipo">
-        <option value="CLIENTE">Cliente</option>
+        <option value="USUARIO">Usuario</option>
         <option value="ADMIN">Admin</option>
       </select>
     </div>
 
-    <div formGroupName="endereco" class="border p-3 mt-4">
+    <div formGroupName="endereco" class="endereco-card">
       <h5>Endereço</h5>
-      
-      <div class="mb-3">
+
+      <div class="form-group">
         <label for="rua">Rua</label>
         <input id="rua" type="text" class="form-control" formControlName="rua">
       </div>
 
-      <div class="mb-3">
+      <div class="form-group">
         <label for="numero">Número</label>
         <input id="numero" type="text" class="form-control" formControlName="numero">
       </div>
 
-      <div class="mb-3">
+      <div class="form-group">
         <label for="bairro">Bairro</label>
         <input id="bairro" type="text" class="form-control" formControlName="bairro">
       </div>
 
-      <div class="mb-3">
+      <div class="form-group">
         <label for="cidade">Cidade</label>
         <input id="cidade" type="text" class="form-control" formControlName="cidade">
       </div>
 
-      <div class="mb-3">
+      <div class="form-group">
         <label for="estado">Estado</label>
         <input id="estado" type="text" class="form-control" formControlName="estado">
       </div>
 
-      <div class="mb-3">
+      <div class="form-group">
         <label for="cep">CEP</label>
         <input id="cep" type="text" class="form-control" formControlName="cep">
       </div>
     </div>
 
-    <div class="mt-4">
-      <button 
-        type="submit" 
-        class="btn btn-primary"
-        [disabled]="form.invalid"
-      >
-        {{ id ? 'Atualizar' : 'Salvar' }}
-      </button>
-
-      <button 
-        type="button" 
-        class="btn btn-secondary ms-2" 
-        (click)="router.navigate(['/usuarios'])"
-      >
-        Cancelar
-      </button>
+    <div class="button-group">
+      <button type="submit" [disabled]="form.invalid"> {{ id ? 'Atualizar' : 'Salvar' }} </button>
+      <button type="button" (click)="router.navigate(['/usuario'])">Cancelar</button>
     </div>
   </form>
 </div>

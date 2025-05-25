@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProdutoService } from '../../../services/produto.service';
 import { Produto } from '../../../models/produto.model';
 import { CarrinhoService } from '../../../services/carrinho.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cardapio',
@@ -17,7 +17,8 @@ export class CardapioComponent implements OnInit {
 
   constructor(
     private produtoService: ProdutoService,
-    private carrinhoService: CarrinhoService
+    private carrinhoService: CarrinhoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,5 +29,9 @@ export class CardapioComponent implements OnInit {
 
   adicionarAoCarrinho(produto: Produto): void {
     this.carrinhoService.adicionarProduto(produto);
+  }
+
+  avaliarProduto(produto: Produto): void {
+    this.router.navigate(['/avaliacao/novo', produto.id]);
   }
 }

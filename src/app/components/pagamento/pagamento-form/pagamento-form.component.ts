@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PagamentoService } from '../../../services/pagamento.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { Usuario } from '../../../models/usuario.model';
+import { PagamentoService } from '../../../services/pagamento.service';
+import { PedidoService } from '../../../services/pedido.service';
 
 @Component({
   selector: 'app-pagamento-form',
@@ -15,27 +15,33 @@ import { Usuario } from '../../../models/usuario.model';
 })
 export class PagamentoFormComponent implements OnInit {
   form!: FormGroup;
-  id!: number;
+  idPedido!: number;
+  valor!: number;
+
+  mensagemSucesso = '';
 
   constructor(
     private fb: FormBuilder,
     private pagamentoService: PagamentoService,
-    public router: Router,
-    private route: ActivatedRoute
+    private pedidoService: PedidoService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.idPedido = this.route.snapshot.params['id'];
+
     this.form = this.fb.group({
-      pedidoId: ['', Validators.required],
-      valor: [null, [Validators.required, Validators.min(0)]]
+      pedidoId: [{ value: '', disabled: true }, Validators.required],
+      valor: [{ value: '', disabled: true }, Validators.required],
+      formaPagamento: ['', Validators.required]
     });
 
-    this.id = this.route.snapshot.params['id'];
-    if (this.id) {
-      this.pagamentoService.findById(this.id).subscribe((pagamento) => {
+    if (this.idPedido) {
+      this.pedidoService.findById(this.idPedido).subscribe(pedido => {
         this.form.patchValue({
-          pedidoId: pagamento.pedido?.id,
-          valor: pagamento.valor
+          pedidoId: pedido.id,
+          valor: pedido.valorTotal
         });
       });
     }
@@ -44,29 +50,18 @@ export class PagamentoFormComponent implements OnInit {
   submit(): void {
     if (this.form.valid) {
       const pagamento = {
-        pedido: {
-          id: this.form.value.pedidoId,
-          comprador: {
-            id: 0,
-            nome: '',
-            email: '',
-            senha: '',
-            tipo: 'CLIENTE'
-          } as Usuario, 
-          produtos: []
-        },
-        valor: this.form.value.valor
+        pedidoId: this.idPedido,
+        valor: this.form.get('valor')?.value,
+        formaPagamento: this.form.get('formaPagamento')?.value
       };
 
-      if (this.id) {
-        this.pagamentoService.update(this.id, pagamento).subscribe(() => {
-          this.router.navigate(['/pagamentos']);
-        });
-      } else {
-        this.pagamentoService.save(pagamento).subscribe(() => {
-          this.router.navigate(['/pagamentos']);
-        });
-      }
+      this.pagamentoService.save(pagamento).subscribe(() => {
+        this.mensagemSucesso = '✅ Pagamento realizado com sucesso!';
+
+        setTimeout(() => {
+          this.router.navigate(['/cardapio']);
+        }, 2000);
+      });
     }
   }
 }

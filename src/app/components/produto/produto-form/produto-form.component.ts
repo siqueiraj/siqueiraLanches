@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from '../../../services/produto.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './produto-form.component.html',
-  styleUrls: ['./produto-form.component.scss'] 
+  styleUrls: ['./produto-form.component.scss']
 })
 export class ProdutoFormComponent implements OnInit {
   form!: FormGroup;
@@ -27,7 +27,7 @@ export class ProdutoFormComponent implements OnInit {
     this.form = this.fb.group({
       nome: ['', [Validators.required]],
       descricao: ['', [Validators.required]],
-      valor: [null, [Validators.required, Validators.min(0)]] 
+      preco: [null, [Validators.required, Validators.min(0)]]
     });
 
     this.id = this.route.snapshot.params['id'];
@@ -40,13 +40,18 @@ export class ProdutoFormComponent implements OnInit {
 
   submit(): void {
     if (this.form.valid) {
+      const produto = {
+        ...this.form.value,
+        preco: Number(this.form.value.preco)
+      };
+
       if (this.id) {
-        this.produtoService.update(this.id, this.form.value).subscribe(() => {
-          this.router.navigate(['/produtos']);
+        this.produtoService.update(this.id, produto).subscribe(() => {
+          this.router.navigate(['/produto']);
         });
       } else {
-        this.produtoService.save(this.form.value).subscribe(() => {
-          this.router.navigate(['/produtos']);
+        this.produtoService.save(produto).subscribe(() => {
+          this.router.navigate(['/produto']);
         });
       }
     }

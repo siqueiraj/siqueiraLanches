@@ -1,31 +1,117 @@
-.d-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px;
+.pagamento-container {
+  padding: 20px;
   }
   
-  h2 {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    font-weight: bold;
+  .pagamento-container .d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
   }
   
-  .card {
-    margin: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  .pagamento-container h2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #EA1D2C;
+  margin: 0;
   }
   
-  .card-body {
-    padding: 20px;
+  .pagamento-container .btn-success {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background-color: #EA1D2C;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  border: none;
+  outline: none;
+  box-shadow: none;
   }
   
-  .button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
+  .pagamento-container .btn-success:hover {
+  background-color: #c41623;
   }
   
+  .pagamento-container .card {
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease-in-out;
+  overflow: hidden;
+  }
+  
+  .pagamento-container .card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  .pagamento-container .card .card-body {
+  padding: 20px;
+  font-size: 1rem;
+  color: #495057;
+  }
+  
+  .pagamento-container .table {
+  width: 100%;
+  margin-bottom: 0;
+  }
+  
+  .pagamento-container .table th,
+  .pagamento-container .table td {
+  text-align: center;
+  padding: 12px 16px;
+  vertical-align: middle;
+  }
+  
+  .pagamento-container .table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  }
+  
+  .pagamento-container .table tbody tr:hover {
+  background-color: #f1f1f1;
+  }
+  
+  .pagamento-container .button-group {
+  display: flex;
+  gap: 10px;
+  }
+  
+  .pagamento-container .button-group .btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  }
+  
+  .pagamento-container .button-group .btn.btn-primary {
+  background-color: #EA1D2C;
+  color: #fff;
+  }
+  
+  .pagamento-container .button-group .btn.btn-primary:hover {
+  background-color: #c41623;
+  transform: scale(1.05);
+  }
+  
+  .pagamento-container .button-group .btn.btn-danger {
+  background-color: #b02a37;
+  color: #fff;
+  }
+  
+  .pagamento-container .button-group .btn.btn-danger:hover {
+  background-color: #902029;
+  transform: scale(1.05);
+  }
+  
+  .pagamento-container .alert {
+  font-weight: 500;
+  font-size: 1rem;
+  }

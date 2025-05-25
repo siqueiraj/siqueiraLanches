@@ -51,11 +51,11 @@ export class UsuarioFormComponent implements OnInit {
     if (this.form.valid) {
       if (this.id) {
         this.usuarioService.update(this.id, this.form.value).subscribe(() => {
-          this.router.navigate(['/usuarios']);
+          this.router.navigate(['/usuario']);
         });
       } else {
         this.usuarioService.save(this.form.value).subscribe(() => {
-          this.router.navigate(['/usuarios']);
+          this.router.navigate(['/usuario']);
         });
       }
     }

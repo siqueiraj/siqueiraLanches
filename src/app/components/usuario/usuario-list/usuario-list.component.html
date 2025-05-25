@@ -1,7 +1,9 @@
-<div class="container">
+<div class="usuario-container">
   <h2 class="mb-4">Lista de Usuários</h2>
 
-  <button class="btn-adicionar" (click)="novoUsuario()">Novo Usuário</button>
+  <button class="btn-novo-usuario" (click)="novoUsuario()">
+    ➕ Novo Usuário
+  </button>
 
   <div *ngIf="usuarios.length > 0; else semUsuarios">
     <table class="table table-striped">
@@ -19,8 +21,12 @@
           <td>{{ usuario.email }}</td>
           <td>{{ usuario.tipo }}</td>
           <td>
-            <button class="btn-adicionar" (click)="editarUsuario(usuario.id)">Editar</button>
-            <button class="btn-adicionar" (click)="delete(usuario.id)">Excluir</button>
+            <button class="btn btn-sm btn-primary me-2" (click)="editarUsuario(usuario.id)">
+               Editar
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="delete(usuario.id)">
+               Excluir
+            </button>
           </td>
         </tr>
       </tbody>

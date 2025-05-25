@@ -30,11 +30,11 @@ export class UsuarioListComponent implements OnInit {
   }
 
   novoUsuario(): void {
-    this.router.navigate(['/usuarios/form']);
+    this.router.navigate(['/usuario/novo']);
   }
 
   editarUsuario(id: number): void {
-    this.router.navigate(['/usuarios/form', id]);
+    this.router.navigate(['/usuario/editar', id]);
   }
 
   delete(id: number): void {

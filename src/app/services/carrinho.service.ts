@@ -1,50 +1,56 @@
 import { Injectable } from '@angular/core';
 import { Produto } from '../models/produto.model';
-import { CarrinhoItem } from '../models/carrinho.item.model'; 
+import { CarrinhoItem } from '../models/carrinho.item.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarrinhoService {
-  private itens: CarrinhoItem[] = [];
-
-  constructor() {}
+  private itensCarrinho: CarrinhoItem[] = [];
+  private carrinhoSubject = new BehaviorSubject<CarrinhoItem[]>([]);
+  carrinhoObservable = this.carrinhoSubject.asObservable();
 
   getItens(): CarrinhoItem[] {
-    return this.itens;
+    return this.itensCarrinho;
   }
 
-  adicionarProduto(produto: Produto) {
-    const itemExistente = this.itens.find(item => item.produto.id === produto.id);
-
-    if (itemExistente) {
-      itemExistente.quantidade++;
+  adicionarProduto(produto: Produto): void {
+    const item = this.itensCarrinho.find(i => i.produto.id === produto.id);
+    if (item) {
+      item.quantidade++;
     } else {
-      this.itens.push({ produto, quantidade: 1 });
+      this.itensCarrinho.push({ produto, quantidade: 1 });
     }
+    this.atualizarObservable();
   }
 
-  removerProduto(produto: Produto) {
-    const itemExistente = this.itens.find(item => item.produto.id === produto.id);
-
-    if (itemExistente) {
-      itemExistente.quantidade--;
-
-      if (itemExistente.quantidade <= 0) {
-        this.itens = this.itens.filter(item => item.produto.id !== produto.id);
+  removerProduto(produto: Produto): void {
+    const index = this.itensCarrinho.findIndex(i => i.produto.id === produto.id);
+    if (index > -1) {
+      this.itensCarrinho[index].quantidade--;
+      if (this.itensCarrinho[index].quantidade <= 0) {
+        this.itensCarrinho.splice(index, 1);
       }
     }
+    this.atualizarObservable();
   }
 
-  removerProdutoCompleto(produto: Produto) {
-    this.itens = this.itens.filter(item => item.produto.id !== produto.id);
+  removerProdutoCompleto(produto: Produto): void {
+    this.itensCarrinho = this.itensCarrinho.filter(i => i.produto.id !== produto.id);
+    this.atualizarObservable();
   }
 
-  limparCarrinho() {
-    this.itens = [];
+  limparCarrinho(): void {
+    this.itensCarrinho = [];
+    this.atualizarObservable();
   }
 
-  getTotal(): number {
-    return this.itens.reduce((total, item) => total + (Number(item.produto.preco) || 0) * item.quantidade, 0);
-  }  
+  getQuantidadeTotal(): number {
+    return this.itensCarrinho.reduce((total, item) => total + item.quantidade, 0);
+  }
+
+  private atualizarObservable(): void {
+    this.carrinhoSubject.next(this.itensCarrinho);
+  }
 }

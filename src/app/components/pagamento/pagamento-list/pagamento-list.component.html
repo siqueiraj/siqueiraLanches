@@ -1,31 +1,40 @@
 <div class="pagamento-container">
-  <h2 class="mb-4">Lista de Pagamentos</h2>
-
-  <button class="btn btn-success mb-3" [routerLink]="['/pagamentos/form']">Novo Pagamento</button>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Pagamentos</h2>
+    <button class="btn btn-success" [routerLink]="['/pagamento/novo']">Novo Pagamento</button>
+  </div>
 
   <div *ngIf="pagamentos.length > 0; else semPagamentos">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID do Pedido</th>
-          <th>Valor</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pagamento of pagamentos">
-          <td>{{ pagamento.pedido.id }}</td>
-          <td>R$ {{ pagamento.valor | number:'1.2-2' }}</td>
-          <td>
-            <button class="btn btn-primary btn-sm" [routerLink]="['/pagamentos/form', pagamento.id]">Editar</button>
-            <button class="btn btn-danger btn-sm ms-2" (click)="delete(pagamento.id)">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-striped align-middle mb-0">
+          <thead>
+            <tr>
+              <th>ID do Pedido</th>
+              <th>Valor</th>
+              <th style="width: 160px">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pagamento of pagamentos">
+              <td>{{ pagamento.pedido?.id ?? 'Sem Pedido' }}</td>
+              <td>R$ {{ pagamento.valor | number: '1.2-2' }}</td>
+              <td>
+                <div class="button-group">
+                  <button class="btn btn-primary btn-sm" [routerLink]="['/pagamento/editar', pagamento.id]">Editar</button>
+                  <button class="btn btn-danger btn-sm" (click)="delete(pagamento.id)">Excluir</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <ng-template #semPagamentos>
-    <p>Nenhum pagamento encontrado.</p>
+    <div class="alert alert-secondary text-center mt-4">
+      Nenhum pagamento encontrado.
+    </div>
   </ng-template>
 </div>

@@ -1,6 +1,7 @@
 .navbar {
-  background-color: #007bff;
+  background-color: #EA1D2C !important;  
   padding: 15px 30px;
+  border-radius: 0;
 
   .navbar-brand {
     font-size: 24px;
@@ -18,15 +19,15 @@
       .nav-link {
         color: white;
         font-weight: bold;
-        margin-right: 10px;
+        margin-right: 15px;
         transition: color 0.3s;
 
         &:hover {
-          color: #ffc107; 
+          color: #ffc107;  
         }
 
         &.active {
-          color: #ffc107; 
+          color: #ffc107;
         }
       }
     }
@@ -36,14 +37,39 @@
     .btn {
       font-weight: bold;
       margin-left: 10px;
+      border: none;
+      background-color: white;
+      color: #EA1D2C;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #ffc107;
+        color: white;
+      }
     }
   }
 }
 
 @media (max-width: 991px) {
   .navbar-collapse {
-    background-color: #007bff;
+    background-color: #EA1D2C !important;
     padding: 15px;
     border-radius: 0 0 10px 10px;
   }
+}
+
+.carrinho-badge {
+  position: absolute;
+  top: 0;
+  left: 70px;
+  background-color: white;
+  color: #EA1D2C;
+  border: 1px solid #EA1D2C;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  line-height: 1;
 }

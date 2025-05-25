@@ -19,31 +19,38 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/cardapio" routerLinkActive="active">Cardápio</a>
         </li>
-        
+
         <li class="nav-item">
-          <a class="nav-link" routerLink="/carrinho" routerLinkActive="active">🛒 Carrinho</a>
+          <a class="nav-link position-relative" routerLink="/carrinho" routerLinkActive="active">
+            🛒 Carrinho
+            <span *ngIf="totalCarrinho > 0" class="carrinho-badge">{{ totalCarrinho }}</span>
+          </a>
         </li>
 
-        <li class="nav-item" *ngIf="isLoggedIn()">
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
           <a class="nav-link" routerLink="/produto" routerLinkActive="active">Produtos</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn()">
+
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
           <a class="nav-link" routerLink="/pedido" routerLinkActive="active">Pedidos</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn()">
+
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
           <a class="nav-link" routerLink="/pagamento" routerLinkActive="active">Pagamentos</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn()">
+
+        <li class="nav-item">
           <a class="nav-link" routerLink="/avaliacao" routerLinkActive="active">Avaliações</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn()">
+
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
           <a class="nav-link" routerLink="/usuario" routerLinkActive="active">Usuários</a>
         </li>
       </ul>
 
       <div class="d-flex">
         <button
-          *ngIf="isLoggedIn(); else loginButton"
+          *ngIf="authService.isLoggedIn(); else loginButton"
           class="btn btn-outline-light"
           (click)="logout()"
         >

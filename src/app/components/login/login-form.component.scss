@@ -1,62 +1,83 @@
+body {
+  background: linear-gradient(135deg, #ffe5e0, #ffffff);
+  font-family: 'Arial', sans-serif;
+}
+
 .login-container {
   max-width: 400px;
   margin: 100px auto;
-  padding: 30px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 40px;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
   text-align: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 
   .titulo {
-    font-size: 28px;
+    font-size: 36px;
     margin-bottom: 20px;
-    color: #007bff; 
+    color: #E32227; 
     font-weight: bold;
   }
 
   h2 {
     margin-bottom: 20px;
     color: #333;
+    font-size: 24px;
+    font-weight: 600;
   }
 
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: left;
 
     label {
       display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
     }
 
     input {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: #E32227;
+        outline: none;
+        box-shadow: 0 0 5px rgba(227,34,39,0.5);
+      }
     }
   }
 
   button {
     width: 100%;
-    padding: 10px;
-    background-color: #007bff; 
+    padding: 14px;
+    background-color: #E32227;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
+    transition: background-color 0.3s, transform 0.3s;
 
     &:hover {
-      background-color: #0056b3; 
+      background-color: #c4151a;
+      transform: scale(1.05);
     }
   }
 
   .erro {
-    color: red;
+    color: #E32227;
     margin-top: 15px;
     font-weight: bold;
   }

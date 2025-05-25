@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService } from '../../../services/pedido.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { PedidoTempService } from '../../../services/pedido-temp.service';
+import { CarrinhoItem } from '../../../models/carrinho.item.model';
+import { AuthService } from '../../../services/auth.service';
+import { Pedido } from '../../../models/pedido.model';
+import { Observable } from 'rxjs';
 import { Produto } from '../../../models/produto.model';
-import { Usuario } from '../../../models/usuario.model';
 
 @Component({
   selector: 'app-pedido-form',
@@ -17,75 +21,78 @@ import { Usuario } from '../../../models/usuario.model';
 export class PedidoFormComponent implements OnInit {
   form!: FormGroup;
   id!: number;
+  itens: CarrinhoItem[] = [];
+  pedidoFinalizado = false;
 
   constructor(
     private fb: FormBuilder,
     private pedidoService: PedidoService,
+    private pedidoTempService: PedidoTempService,
+    private authService: AuthService,
     public router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      compradorId: ['', Validators.required],
-      produtosIds: this.fb.array([])
-    });
+    this.form = this.fb.group({});
 
+    this.itens = this.pedidoTempService.itens;
     this.id = this.route.snapshot.params['id'];
+
     if (this.id) {
       this.pedidoService.findById(this.id).subscribe((pedido) => {
-        this.form.patchValue({
-          compradorId: pedido.comprador.id
-        });
-
-        const produtosArray = this.form.get('produtosIds') as FormArray;
-        pedido.produtos.forEach(produto => {
-          produtosArray.push(new FormControl(produto.id));
-        });
+        this.itens = pedido.itens.map((item: any) => ({
+          produto: {
+            id: item.produto.id,
+            nome: item.produto.nome,
+            descricao: item.produto.descricao,
+            preco: item.produto.preco
+          },
+          quantidade: item.quantidade
+        }));
       });
     }
   }
 
-  get produtosControls() {
-    return (this.form.get('produtosIds') as FormArray).controls;
-  }
-
-  adicionarProduto(): void {
-    (this.form.get('produtosIds') as FormArray).push(this.fb.control('', Validators.required));
-  }
-
-  removerProduto(index: number): void {
-    (this.form.get('produtosIds') as FormArray).removeAt(index);
+  get total(): number {
+    return this.itens.reduce((soma, item) => soma + (Number(item.produto.preco) || 0) * item.quantidade, 0);
   }
 
   submit(): void {
-    if (this.form.valid) {
-      const pedido = {
-        id: this.id ?? 0,
-        comprador: {
-          id: this.form.value.compradorId,
-          nome: '',
-          email: '',
-          senha: '',
-          tipo: 'CLIENTE'
-        } as Usuario,
-        produtos: this.form.value.produtosIds.map((id: number) => ({
-          id,
-          nome: '',
-          descricao: '',
-          valor: 0
-        })) as Produto[]
-      };
-
-      if (this.id) {
-        this.pedidoService.update(this.id, pedido).subscribe(() => {
-          this.router.navigate(['/pedidos']);
-        });
-      } else {
-        this.pedidoService.save(pedido).subscribe(() => {
-          this.router.navigate(['/pedidos']);
-        });
+    if (this.itens.length > 0) {
+      const usuario = this.authService.getUsuario();
+      if (!usuario) {
+        alert('Usuário não logado.');
+        return;
       }
+  
+      const pedidoDTO = {
+        compradorId: usuario.id,
+        itens: this.itens.map(item => ({
+          produtoId: item.produto.id,
+          quantidade: item.quantidade
+        }))
+      };
+  
+      console.log('Enviando pedido:', pedidoDTO);
+  
+      const operacao: Observable<Pedido> = this.id
+        ? this.pedidoService.update(this.id, pedidoDTO)
+        : this.pedidoService.save(pedidoDTO);
+  
+      operacao.subscribe({
+        next: (pedidoSalvo) => {
+          this.pedidoFinalizado = true;
+          setTimeout(() => {
+            this.router.navigate(['/pagamento', pedidoSalvo.id]); 
+          }, 1500);
+        },
+        error: (err: any) => {
+          console.error('Erro ao salvar pedido:', err);
+          alert('Erro ao finalizar pedido. Verifique o console.');
+        }
+      });
     }
   }
-}
+  
+}  

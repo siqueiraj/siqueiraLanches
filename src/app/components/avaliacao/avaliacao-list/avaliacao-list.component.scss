@@ -1,46 +1,67 @@
-.d-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px;
-}
+.avaliacao-container {
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 20px 10px;
+  }
 
-h2 {
-  padding-top: 20px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 20px;
-  font-weight: bold;
-}
+  h2 {
+    padding-top: 10px;
+    padding-bottom: 15px;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #212529;
+    margin-left: 20px;
+  }
 
-.card {
-  margin: 20px;
-  border-radius: 10px;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
+  .btn-nova-avaliacao {
+    background-color: #EA1D2C;
+    color: white;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
 
-.card-body {
-  padding: 20px;
-}
+  .btn-nova-avaliacao:hover {
+    background-color: #c41623;
+    transform: scale(1.05);
+  }
 
-p {
-  margin-bottom: 8px;
-  padding-left: 10px;
-}
-.card-body {
-    span {
-      font-size: 1.5rem;
-      color: gold;
+  .card {
+    margin: 20px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     }
-  
-    .card-title {
-      margin-bottom: 0.5rem;
-    }
-  
-    p {
-      margin-bottom: 0.3rem;
+
+    .card-body {
+      padding: 24px;
+      font-size: 1rem;
+      color: #495057;
+
+      span {
+        font-size: 1.5rem;
+        color: gold;
+      }
+
+      .card-title {
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        margin-bottom: 0.3rem;
+      }
     }
   }
-  
+
+  .alert {
+    margin: 20px;
+  }
+}

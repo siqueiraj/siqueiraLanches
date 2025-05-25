@@ -4,7 +4,7 @@ export interface Avaliacao {
   id: number;
   nota: number;
   comentario: string;
-  produto: Produto;
+  produto?: Produto | null;
   usuario: {
     id: number;
   };

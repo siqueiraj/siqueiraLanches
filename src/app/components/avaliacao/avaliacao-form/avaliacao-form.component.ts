@@ -30,7 +30,9 @@ export class AvaliacaoFormComponent implements OnInit {
       comentario: ['', [Validators.required]]
     });
 
-    this.id = this.route.snapshot.params['id'];
+  const idProduto = this.route.snapshot.params['idProduto'];
+  const idAvaliacao = this.route.snapshot.params['id'];
+
     if (this.id) {
       this.avaliacaoService.findById(this.id).subscribe((avaliacao) => {
         this.form.patchValue(avaliacao);
@@ -40,15 +42,23 @@ export class AvaliacaoFormComponent implements OnInit {
 
   submit(): void {
     if (this.form.valid) {
-      if (this.id) {
-        this.avaliacaoService.update(this.id, this.form.value).subscribe(() => {
-          this.router.navigate(['/avaliacoes']);
+      const idProduto = this.route.snapshot.params['idProduto'];
+      const idAvaliacao = this.route.snapshot.params['id'];
+  
+      const avaliacao: Avaliacao = {
+        ...this.form.value,
+        produto: { id: Number(idProduto || 0) }
+      };
+  
+      if (idAvaliacao) {
+        this.avaliacaoService.update(Number(idAvaliacao), avaliacao).subscribe(() => {
+          this.router.navigate(['/avaliacao']);
         });
       } else {
-        this.avaliacaoService.save(this.form.value).subscribe(() => {
-          this.router.navigate(['/avaliacoes']);
+        this.avaliacaoService.save(avaliacao).subscribe(() => {
+          this.router.navigate(['/avaliacao']);
         });
       }
     }
   }
-}
+}  
