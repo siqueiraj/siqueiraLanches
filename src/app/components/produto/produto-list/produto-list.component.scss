@@ -16,7 +16,13 @@
   border: none;
   outline: none;
 }
-
+h2{ 
+  justify-content: center;
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: #EA1D2C;
+  font-size: 1.8rem;
+}
 .btn:focus {
   outline: none;
   box-shadow: none;

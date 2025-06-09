@@ -1,7 +1,6 @@
 <div class="avaliacao-container">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Lista de Avaliações</h2>
-    <button class="btn-nova-avaliacao" [routerLink]="['/avaliacao/novo']">Nova Avaliação</button>
   </div>
 
   <div *ngIf="avaliacoes.length > 0; else semAvaliacoes">

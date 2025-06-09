@@ -1,7 +1,6 @@
 <div class="pagamento-container">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Lista de Pagamentos</h2>
-    <button class="btn btn-success" [routerLink]="['/pagamento/novo']">Novo Pagamento</button>
   </div>
 
   <div *ngIf="pagamentos.length > 0; else semPagamentos">
